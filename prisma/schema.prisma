@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ScrapingRecord {
+  id        String  @id @default(uuid())
+  
+  // Start url
+  url   String
+  
+  // In case of redirect, this will be the final URL
+  loadedUrl  String
+  
+  // page's content, e.g. HTML, RSS, ..
+  content   String
+  
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
